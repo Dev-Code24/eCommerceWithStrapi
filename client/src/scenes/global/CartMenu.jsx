@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Divider,
-  Icon,
   IconButton,
   Typography,
 } from '@mui/material';

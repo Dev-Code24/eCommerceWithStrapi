@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Box, Typography, Tab, Tabs, useMediaQuery } from '@mui/material';
-import Item from '../../components/Item';
-import { setItems } from '../../state';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Typography, Tab, Tabs, useMediaQuery } from "@mui/material";
+import Item from "../../components/Item";
+import { setItems } from "../../state";
 
 const ShoppingList = () => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState('all');
+  const [value, setValue] = useState("all");
   const items = useSelector((state) => state.cart.items);
-  const isNonMobile = useMediaQuery('(min-width:600px)');
+  const isNonMobile = useMediaQuery("(min-width:600px)");
   console.log(`items`, items);
 
   const handleChange = (event, newValue) => {
@@ -16,8 +16,8 @@ const ShoppingList = () => {
   };
   async function getItems() {
     const items = await fetch(
-      'http://localhost:1337/api/items?populate=image',
-      { method: 'GET' }
+      "http://localhost:1337/api/items?populate=image",
+      { method: "GET" }
     );
     const itemsJson = await items.json();
     dispatch(setItems(itemsJson.data));
@@ -25,16 +25,17 @@ const ShoppingList = () => {
 
   useEffect(() => {
     getItems();
-  }, []);
+    // eslint-disable-next-line
+  }, []); 
 
   const topRatedItems = items.filter(
-    (item) => item.attributes.category === 'topRated'
+    (item) => item.attributes.category === "topRated"
   );
   const newArrivalsItems = items.filter(
-    (item) => item.attributes.category === 'newArrivals'
+    (item) => item.attributes.category === "newArrivals"
   );
   const bestSellersItems = items.filter(
-    (item) => item.attributes.category === 'bestSellers'
+    (item) => item.attributes.category === "bestSellers"
   );
   return (
     <Box width="80%" margin="80px auto">
@@ -47,14 +48,13 @@ const ShoppingList = () => {
         value={value}
         onChange={handleChange}
         centered
-        TabIndicatorProps={{ sx: { display: isNonMobile ? 'block' : 'none' } }}
+        TabIndicatorProps={{ sx: { display: isNonMobile ? "block" : "none" } }}
         sx={{
-          m: '25px',
-          '& .MuiTabs-flexContainer': {
-            flexWrap: 'wrap',
+          m: "25px",
+          "& .MuiTabs-flexContainer": {
+            flexWrap: "wrap",
           },
-        }}
-      >
+        }}>
         <Tab label="ALL" value="all"></Tab>
         <Tab label="BEST SELLERS" value="bestSellers"></Tab>
         <Tab label="NEW ARRIVALS" value="newArrivals"></Tab>
@@ -66,21 +66,20 @@ const ShoppingList = () => {
         gridTemplateColumns="repeat(auto-fill,300px)"
         justifyContent="space-around"
         rowGap="20px"
-        columnGap="1.33%"
-      >
-        {value === 'all' &&
+        columnGap="1.33%">
+        {value === "all" &&
           items.map((item) => [
             <Item item={item} key={`${item.name}-${item.id}`}></Item>,
           ])}
-        {value === 'newArrivals' &&
+        {value === "newArrivals" &&
           newArrivalsItems.map((item) => [
             <Item item={item} key={`${item.name}-${item.id}`}></Item>,
           ])}
-        {value === 'topRated' &&
+        {value === "topRated" &&
           topRatedItems.map((item) => [
             <Item item={item} key={`${item.name}-${item.id}`}></Item>,
           ])}
-        {value === 'bestSellers' &&
+        {value === "bestSellers" &&
           bestSellersItems.map((item) => [
             <Item item={item} key={`${item.name}-${item.id}`}></Item>,
           ])}
