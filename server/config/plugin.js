@@ -3,7 +3,7 @@ module.exports = ({ env }) => ({
     enabled: true,
     config: {
       deployHook:
-        "https://api.vercel.com/v1/integrations/deploy/prj_yBVTAeb9bfkCc8RurDKOywQQr56u/Ai1C7lZ7aG",
+        "https://api.vercel.com/v1/integrations/deploy/prj_M3xz7FqrEpDsNUYCefPXciSXHTBC/cLgvyZ8U61",
       apiToken: "M2LS1eXY5cPQD1yrbNGylMVi",
     },
   },
